@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponse
+from django.conf.urls import url, include
+from . import views
+
 
 def index(request):
     return HttpResponse("Hallo World")
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',index)
+    url(r'^admin/', admin.site.urls),
+    url(r'^blog/', include('blog.urls')),
+    url(r'^$', views.index),
 ]
